@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANOVA - Live Demo</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+</head>
+<body>
+    <div class="glowing-gradient"></div>
+
+    <header class="header">
+        <nav class="nav container">
+            <a href="/en/" class="logo">
+                <img src="/assets/logo.svg" alt="ANOVA Logo">
+                <span>ANOVA</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/en/">Home</a></li>
+                <li><a href="/demo/" class="active">Demo</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/demo/" class="cta-button">Get Started</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section demo-container">
+            <h1 class="section-title">Live Demo</h1>
+            <div class="breathing-orb"></div>
+            <a href="javascript:window.anovaTrigger()" class="cta-button">Connect Call</a>
+            <p id="demo-status-text" class="demo-status">Click "Connect Call" to activate the AI assistant.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="/en/" class="logo">
+                <img src="/assets/logo.svg" alt="ANOVA Logo">
+                <span>ANOVA</span>
+            </a>
+            <ul class="footer-links">
+                 <li><a href="/en/">Home</a></li>
+                <li><a href="/demo/">Demo</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            <p class="copyright">&copy; 2024 Anova AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/src/anova-voice-widget.js"></script>
+    <script>
+        // Update status text when widget is used
+        const originalTrigger = window.anovaTrigger;
+        window.anovaTrigger = () => {
+            originalTrigger();
+            document.getElementById('demo-status-text').textContent = 'Anova assistant activated. Check the widget in the corner.'
+        };
+    </script>
+</body>
+</html>

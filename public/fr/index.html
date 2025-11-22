@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANOVA - L'immobilier en pilote automatique</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+</head>
+<body>
+    <div class="glowing-gradient"></div>
+
+    <header class="header">
+        <nav class="nav container">
+            <a href="/fr/" class="logo">
+                <img src="/assets/logo.svg" alt="Logo ANOVA">
+                <span>ANOVA</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/fr/" class="active">Accueil</a></li>
+                <li><a href="/demo/">Démo</a></li>
+                <li><a href="/pricing/">Tarifs</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <select class="lang-selector" onchange="location = this.value;">
+                    <option value="/en/">English</option>
+                    <option value="/fr/" selected>Français</option>
+                </select>
+                <a href="/demo/" class="cta-button">Commencer</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div id="sphere-container"></div>
+            <div class="hero-content container">
+                <h1>L'immobilier en pilote automatique</h1>
+                <p class="tagline">Notre assistant vocal IA gère les appels clients 24/7, pour que vous puissiez vous concentrer sur la conclusion de ventes.</p>
+                <div class="hero-actions">
+                    <a href="javascript:window.anovaTrigger()" class="cta-button">Démarrer la conversation</a>
+                    <a href="#features" class="cta-button cta-button-secondary">En savoir plus</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section">
+            <div class="container">
+                <h2 class="section-title">Le futur de l'agence immobilière</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Disponibilité 24/7</h3>
+                        <p>Ne manquez jamais un prospect. Anova répond à chaque appel, à toute heure, capture les informations vitales et planifie des rendez-vous même pendant votre sommeil.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Conversations Intelligentes</h3>
+                        <p>Anova comprend le langage naturel, répond aux questions immobilières complexes et offre une expérience fluide et professionnelle à vos clients.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Intégration Transparente</h3>
+                        <p>Connectez Anova à votre CRM et calendrier existants. Toutes les données d'appel, notes et rendez-vous sont synchronisés automatiquement avec votre flux de travail.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-strip">
+            <div class="container">
+                <h2>Prêt à essayer?</h2>
+                <div class="mic-activator" onclick="window.anovaTrigger()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line></svg>
+                    <span>Activer l'assistant Anova</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="/fr/" class="logo">
+                <img src="/assets/logo.svg" alt="Logo ANOVA">
+                <span>ANOVA</span>
+            </a>
+            <ul class="footer-links">
+                <li><a href="/fr/">Accueil</a></li>
+                <li><a href="/demo/">Démo</a></li>
+                <li><a href="/pricing/">Tarifs</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            <p class="copyright">&copy; 2024 Anova AI. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="/src/anova-voice-widget.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // 3D Sphere animation
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.getElementById('sphere-container').appendChild( renderer.domElement );
+
+        const geometry = new THREE.SphereGeometry( 5, 64, 64 );
+        const material = new THREE.ShaderMaterial({
+            vertexShader: `
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform float time;
+                varying vec2 vUv;
+
+                void main() {
+                    vec2 p = -1.0 + 2.0 * vUv;
+                    float a = time * 0.2;
+                    float d = length(p * vec2(1.0, 1.0) - vec2(cos(a), sin(a))) * 2.0;
+                    d = sin(d * 8.0 + time) / 8.0;
+                    d = abs(d);
+                    d = pow(0.01 / d, 1.2);
+                    vec3 color = vec3(0.05, 0.59, 0.35);
+                    gl_FragColor = vec4(color * d, 1.0);
+                }
+            `,
+            uniforms: {
+                time: { value: 0.0 }
+            },
+            transparent: true,
+        });
+
+        const sphere = new THREE.Mesh( geometry, material );
+        scene.add( sphere );
+        camera.position.z = 10;
+
+        function animate() {
+            requestAnimationFrame( animate );
+            material.uniforms.time.value += 0.02;
+            sphere.rotation.y += 0.001;
+            renderer.render( scene, camera );
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANOVA - Contact Us</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+</head>
+<body>
+    <div class="glowing-gradient"></div>
+
+    <header class="header">
+        <nav class="nav container">
+            <a href="/en/" class="logo">
+                <img src="/assets/logo.svg" alt="ANOVA Logo">
+                <span>ANOVA</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/en/">Home</a></li>
+                <li><a href="/demo/">Demo</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/contact/" class="active">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="/demo/" class="cta-button">Get Started</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1 class="section-title">Get in Touch</h1>
+                <form class="contact-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="plan">Selected Plan</label>
+                        <select id="plan-selector" name="plan" class="form-group" style="width: 100%; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--glass-border); border-radius: 6px; padding: 0.75rem 1rem; color: var(--slate-200); font-size: 1rem;">
+                            <option value="none">No plan selected</option>
+                            <option value="professional">Professional ($199/mo)</option>
+                            <option value="enterprise">Enterprise ($499/mo)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="/en/" class="logo">
+                <img src="/assets/logo.svg" alt="ANOVA Logo">
+                <span>ANOVA</span>
+            </a>
+            <ul class="footer-links">
+                <li><a href="/en/">Home</a></li>
+                <li><a href="/demo/">Demo</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+            <p class="copyright">&copy; 2024 Anova AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/src/anova-voice-widget.js"></script>
+    <script>
+        // Pre-select plan based on URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const plan = urlParams.get('plan');
+        if (plan) {
+            document.getElementById('plan-selector').value = plan;
+        }
+    </script>
+</body>
+</html>

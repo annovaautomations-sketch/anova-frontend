@@ -1,0 +1,32 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/fr",
+        "destination": "/fr/index.html"
+      },
+      {
+        "source": "/demo",
+        "destination": "/demo/index.html"
+      },
+      {
+        "source": "/pricing",
+        "destination": "/pricing/index.html"
+      },
+      {
+        "source": "/contact",
+        "destination": "/contact/index.html"
+      },
+      {
+        "source": "**",
+        "destination": "/en/index.html"
+      }
+    ]
+  }
+}

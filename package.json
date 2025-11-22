@@ -1,0 +1,16 @@
+{
+  "name": "anova-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for ANOVA Real Estate AI",
+  "main": "public/index.html",
+  "scripts": {
+    "start": "serve public",
+    "deploy": "firebase deploy --only hosting"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serve": "^14.0.0"
+  },
+  "author": "Anova AI",
+  "license": "UNLICENSED"
+}
